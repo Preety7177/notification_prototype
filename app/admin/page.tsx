@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { User } from '@prisma/client';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Status } from './submit-button';
+import { Status } from './statushook';
 
 export default async function AdminPage() {
   const users: User[] = await fetchUsers();
