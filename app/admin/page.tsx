@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { User } from '@prisma/client';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { useOptimistic } from 'react';
+import { Status } from './submit-button';
 
 export default async function AdminPage() {
   const users: User[] = await fetchUsers();
@@ -39,7 +39,7 @@ export default async function AdminPage() {
               </SelectTrigger>
               <SelectContent>
                 {users.map((user) => (
-                  <SelectItem value={user.id.toString()}>
+                  <SelectItem key={user.id.toString()} value={user.id.toString()}>
                     {user.name}
                   </SelectItem>
                 ))}
@@ -54,6 +54,7 @@ export default async function AdminPage() {
               name="message"
               className="mt-1 p-2 block w-full border rounded"
             />
+            <Status/>
             <Button type="submit">
               Create Notification
             </Button>

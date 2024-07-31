@@ -16,14 +16,14 @@ export const createNotification = async (formData: FormData) => {
     throw new Error('Message is required');
   }
 
-  await prisma.notification.create({
+  return await prisma.notification.create({
     data: {
       userId,
       message,
     },
 
   });
-
+  
   
 };
 
