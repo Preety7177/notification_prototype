@@ -1,13 +1,15 @@
 // /app/page.tsx
+'use server'
 
-import { createDummyUsers, fetchUsers, findUser, getUserNotificationCount, fetchNewNotifications } from '@/app/admin/actions';
-import { Button } from '@/components/ui/button';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Badge } from '@/components/ui/badge';
-import { User, Notification } from '@prisma/client';
-import { parse } from 'path';
+/***
+ * This will a server component and will not have any react hooks. 
+ * This will require a valid user id to fetch the user's notifications
+ * This function will also host the hook which will be called by the client component which will mount the badge on the top navigation bar
+ * 
+ **/
+
+import { findUser, fetchNewNotifications } from '@/app/admin/actions';
+import { User } from '@prisma/client';
 import NotificationBadge from './notification-badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
@@ -37,21 +39,21 @@ export default async function NotificationPage({ params }: { params: { id: strin
         }
     };
 
-    //Let's display the user's name and a form to fetch notifications
-
     return (
         <div className="p-8">
             <h1 className="text-2xl font-bold">{selectedUser?.name} Notifications</h1>
-            <NotificationBadge seconds={seconds} fetchNotifications={handleFetchNotifications}/>
+            <NotificationBadge seconds={seconds} fetchNotifications={handleFetchNotifications} />
             <Card className="w-[350px]">
-                <CardHeader> 
+                <CardHeader>
                     <CardTitle>Key functionality to add</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <p> We want to have an icon and a badge on the navigation menu on the top</p>
-                    <p> Initially we show how many new messages in the badge</p>
-                    <p> when the user clicks on the badge, it will show a menu/card which will show a preview of the new messages</p>
-                    <p>and it will reset the new notification count</p>
+                    <div className="bg-gray-100 p-4 rounded-md">
+                        <p>We want to have an icon and a badge on the navigation menu on the top.</p>
+                        <p>Initially, we show how many new messages in the badge.</p>
+                        <p>When the user clicks on the badge, it will show a menu/card which will show a preview of the new messages.</p>
+                        <p>And it will reset the new notification count.</p>
+                    </div>
                 </CardContent>
             </Card>
         </div>

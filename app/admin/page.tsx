@@ -6,6 +6,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { User } from '@prisma/client';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { useOptimistic } from 'react';
 
 export default async function AdminPage() {
   const users: User[] = await fetchUsers();
@@ -14,40 +16,50 @@ export default async function AdminPage() {
     <div className="p-8">
       <div className="mb-4">
         <form action={createDummyUsers} method="post">
-          <Button type="submit" className="p-2 bg-blue-500 text-white rounded">
+          <Button type="submit">
             Create Dummy Users
           </Button>
         </form>
       </div>
-      <form action={createNotification} method="post" className="space-y-4">
-          <Label htmlFor="userId" className="block text-sm font-medium text-gray-700">
-            User
-          </Label>
-          <Select name="userId">
-            <SelectTrigger>
-            <SelectValue placeholder="SelectUser" />
-            </SelectTrigger>
-            <SelectContent>
-            {users.map((user) => (
-              <SelectItem value={user.id.toString()}>
-                {user.name}
-              </SelectItem>
-            ))}
-            </SelectContent>
-          </Select>
-          <Label htmlFor="message" className="block text-sm font-medium text-gray-700">
-            Message
-          </Label>
-          <Input
-            type="text"
-            id="message"
-            name="message"
-            className="mt-1 p-2 block w-full border rounded"
-          />
-        <Button type="submit" className="p-2 bg-green-500 text-white rounded">
-          Create Notification
-        </Button>
-      </form>
+      <Card>
+        <CardHeader>
+
+        <CardTitle>Create Notification</CardTitle>
+        <CardDescription>Create a notification for a selected user. User should be able to see the message within 30 seconds</CardDescription>
+ 
+        </CardHeader>
+        <CardContent>
+          <form action={createNotification} method="post" className="space-y-4">
+            <Label htmlFor="userId" className="block text-sm font-medium text-gray-700">
+              User
+            </Label>
+            <Select name="userId">
+              <SelectTrigger>
+                <SelectValue placeholder="Select User" />
+              </SelectTrigger>
+              <SelectContent>
+                {users.map((user) => (
+                  <SelectItem value={user.id.toString()}>
+                    {user.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <Label htmlFor="message" className="block text-sm font-medium text-gray-700">
+              Message
+            </Label>
+            <Input
+              type="text"
+              id="message"
+              name="message"
+              className="mt-1 p-2 block w-full border rounded"
+            />
+            <Button type="submit">
+              Create Notification
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
     </div>
   );
 }

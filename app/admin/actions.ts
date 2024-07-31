@@ -1,5 +1,7 @@
 // /app/admin/actions.ts
 
+import { toast, ToasterToast } from '@/components/ui/use-toast';
+
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
@@ -19,7 +21,10 @@ export const createNotification = async (formData: FormData) => {
       userId,
       message,
     },
+
   });
+
+  
 };
 
 export const createDummyUsers = async () => {
