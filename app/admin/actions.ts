@@ -63,3 +63,12 @@ export const fetchNewNotifications = async (userId: number, seconds: number) => 
     },
   });
 };
+
+export const findUser = async (id: number) => {
+  'use server';
+  return await prisma.user.findUnique({
+    where: {
+      id,
+    },
+  });
+}
