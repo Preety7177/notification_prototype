@@ -10,6 +10,7 @@ import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { User, Notification } from '@prisma/client';
 import { redirect } from 'next/navigation';
+import Link from 'next/link'; // Import the Link component
 
 export default async function Page() {
   const users: User[] = await fetchUsers();
@@ -47,6 +48,11 @@ export default async function Page() {
           Fetch Notifications
         </Button>
       </form>
+      <div className="mt-4">
+        <Link href="/admin" className="p-2 bg-green-500 text-white rounded">
+          Go to Admin Home Page
+        </Link>
+      </div>
     </div>
   );
 }

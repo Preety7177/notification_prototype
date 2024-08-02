@@ -8,6 +8,7 @@ import { Label } from '@/components/ui/label';
 import { User } from '@prisma/client';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Status } from './statushook';
+import Link from 'next/link'; // Import the Link component
 
 export default async function AdminPage() {
   const users: User[] = await fetchUsers();
@@ -59,6 +60,11 @@ export default async function AdminPage() {
               Create Notification
             </Button>
           </form>
+          <div className="mt-4">
+            <Link href="/" className="p-2 bg-green-500 text-white rounded">
+              Go to Home Page
+            </Link>
+          </div>
         </CardContent>
       </Card>
     </div>
