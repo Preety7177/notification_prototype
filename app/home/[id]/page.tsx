@@ -42,7 +42,9 @@ export default async function NotificationPage({ params }: { params: { id: strin
     return (
         <div className="p-8">
             <h1 className="text-2xl font-bold">{selectedUser?.name} Notifications</h1>
-            <NotificationBadge seconds={seconds} fetchNotifications={handleFetchNotifications} />
+            <div style={{alignItems: 'end'}}>
+                <NotificationBadge seconds={seconds} fetchNotifications={handleFetchNotifications} />
+            </div>
             <Card className="w-[350px]">
                 <CardHeader>
                     <CardTitle>Key functionality to add</CardTitle>
